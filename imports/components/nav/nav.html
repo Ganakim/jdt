@@ -3,18 +3,27 @@
     <div class="f-1"></div>
     <a href="/home" class="navbar-brand f-1 d-flex justify-content-center">
       <h2 class="pt-2">
-        JDT Raid Planner
+        Amnesia
       </h2>
     </a>
     <div class="position-relative f-1 d-flex justify-content-end">
-      {{#if currentUser}}
-        <div>{{currentUser.username}}</div>
-      {{else}}
-        <div id="loginBtn" class="btn btn-dark d-flex flex-column border border-light">
-          <i class="fab fa-2x fa-discord"></i>
-          Login with discord
-        </div>
-      {{/if}}
+      <div class="dropdownTrigger navDrop text-light d-flex">
+        {{#if currentUser}}
+  				<div>{{currentUser.username}}</div>
+  			{{else}}
+  			  <div>Login</div>
+				{{/if}}
+				<div class="ml-1 dropdownIndicator-left flat"></div>
+			</div>
+			<div class="bg-light dropdown flat">
+        {{#if currentUser}}
+          <div class="logins p-4">
+            <button type="submit" id="logoutBtn" class="at-btn submit btn btn-block btn-default">Logout</button>
+          </div>
+        {{else}}
+          {{>logins}}
+        {{/if}}
+			</div>
     </div>
 	</nav>
 </template>

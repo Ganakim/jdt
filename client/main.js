@@ -28,12 +28,4 @@ Template.main.events({
   },
 })
 
-Meteor.subscribe('Users')
-Meteor.subscribe('Avail')
-Meteor.subscribe('Dates')
-Meteor.subscribe('Chats')
-Meteor.subscribe('Classes')
-Meteor.subscribe('Races')
-Meteor.subscribe('Backgrounds')
-Meteor.subscribe('Alignments')
-Meteor.subscribe('Items')
+Meteor.subscribe('users')
