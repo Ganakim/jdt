@@ -17,3 +17,10 @@ FlowRouter.route('/home', {
     Session.set('content', 'home')
   }
 })
+
+FlowRouter.route('/auth', {
+  action(params, queryParams) {
+    console.log(params, queryParams)
+    Session.set('content', 'home')
+  }
+})
