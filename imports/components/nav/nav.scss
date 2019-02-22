@@ -1,0 +1,19 @@
+.nav{
+  flex-shrink: 0;
+  .navbar-brand h2{
+    font-family: Helvetica;
+    font-weight: 600;
+  }
+  #artistSearchResults{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 3;
+  }
+  .dropdown{
+    position: absolute;
+    top: 150%;
+    right: 0;
+  }
+}

@@ -1,0 +1,44 @@
+<template name="home">
+	<div class="d-flex">
+		{{#if currentUser}}
+			{{>Template.dynamic template=currentUser.type}}
+		{{else}}
+			You'll need to log in for access!
+		{{/if}}
+	</div>
+</template>
+
+<template name="player">
+	<div class="d-flex w-100">
+		<div class="scroll-y">
+			{{>calendar}}
+		</div>
+		<div class="d-flex f-1 flex-column">
+			<h2 class="d-flex justify-content-center mt-4">
+				Welcome to the game {{currentUser.username}}!
+			</h2>
+			<div class="border border-{{currentUser.theme}} mx-3 mt-3"></div>
+			{{#each homeOptions}}
+				<div class="btn homeOption btn-{{currentUser.theme}} mx-4 mt-3 py-3">{{text}}</div>
+			{{/each}}
+		</div>
+	</div>
+</template>
+
+<template name="dm">
+	<div class="d-flex w-100">
+		<div class="scroll-y">
+			{{>calendar}}
+		</div>
+		<div class="d-flex f-1 flex-column">
+			<h2 class="d-flex justify-content-center mt-4">
+				Welcome to the game {{currentUser.username}}!
+			</h2>
+			<div class="border border-{{currentUser.theme}} mx-3 mt-3"></div>
+			{{#each homeOptions}}
+				<div class="btn homeOption btn-{{color}} mx-4 mt-3 py-3">{{text}}</div>
+			{{/each}}
+		</div>
+	</div>
+</template>
+

@@ -1,0 +1,85 @@
+@import './imports.scss';
+
+@font-face {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style : normal;
+         src : url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?v=4.3.0");
+         src : url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?#iefix&v=4.3.0") format("embedded-opentype"),
+               url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff2?v=4.3.0") format("woff2"),
+               url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff?v=4.3.0") format("woff"),
+               url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.ttf?v=4.3.0") format("truetype"),
+               url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular") format("svg");
+}
+
+$nav-height: 80px;
+
+.main{
+  height: 100vh;
+  .nav{
+    height: $nav-height;
+  }
+  .mainContent{
+    height: calc(100vh - $nav-height);
+  }
+}
+.f-1{
+   flex: 1; 
+}
+.f-a{
+  flex: auto;
+}
+.h-0{
+  height: 0;
+}
+.w-0{
+  width: 0;
+}
+body{
+  height: 100vh;
+  overflow: hidden;
+}
+.pointer{
+  cursor: pointer;
+}
+.dropdown{
+  z-index: 3;
+}
+.dropdown.flat{
+  display: none;
+}
+.dropdownTrigger{
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.dropdownIndicator-left, .dropdownIndicator-right{
+  width: 10px;
+}
+.dropdownIndicator-left:after, .dropdownIndicator-right:after{
+  content: "\f0d7";
+  font-family: FontAwesome;
+}
+.dropdownIndicator-left.flat:after{
+  content: "\f0d9";
+  font-family: FontAwesome;
+}
+.dropdownIndicator-right.flat:after{
+  content: "\f0da";
+  font-family: FontAwesome;
+}
+.scroll-y{
+  max-height: 100%;
+  overflow-y: auto;
+}
+/*::-webkit-scrollbar {*/
+/*  background: rbga(0,0,0,0) !important;*/
+/*}*/
+::-webkit-scrollbar-track {
+  background: rbga(0,0,0,0) !important;
+}
+::-webkit-scrollbar-track-piece {
+  background: rbga(0,0,0,0) !important;
+}

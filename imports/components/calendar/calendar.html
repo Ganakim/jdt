@@ -1,0 +1,54 @@
+<template name="calendar">
+  <div class="calendar card">
+    <div class="card-header">
+      <h2 class="f-1 text-center">
+        {{formatTime false "MMMM"}}
+      </h2>
+    </div>
+    <div class="card-body flex-column">
+      <div class="border">
+        <div class="d-flex">
+          {{#each (part (search "Dates" false false false) 0 7)}}
+            <div class="f-1 weekday border">
+              {{formatTime date "ddd"}}
+            </div>
+          {{/each}}
+        </div>
+        {{#each loop 5}}
+        <div class="d-flex">
+          {{#each week @index}}
+            <div class="d-flex flex-column">
+              <div class="weekday border">
+                <div class="dayNumber {{#if today date}}text-danger border border-danger font-italic font-weight-bold{{/if}} d-flex justify-content-center my-1 align-items-center rounded-circle">
+                  {{formatTime date "D"}}
+                </div>
+              </div>
+              <div class="f-1 position-relative pointer border day d-flex">
+                  <div id="Am" class="f-1">
+                    {{#each arrayify Am}}
+                      {{#if this}}
+                        <div class="p-3 rounded-circle bg-{{currentUser.theme}}"></div>
+                      {{else}}
+                        <i class="fas fa-times text-{{currentUser.theme}}"></i>
+                      {{/if}}
+                    {{/each}}
+                  </div>
+                  <div id="Pm" class="f-1">
+                    {{#each arrayify Pm}}
+                      {{#if this}}
+                        <div class="p-3 rounded-circle bg-{{currentUser.theme}}"></div>
+                      {{else}}
+                        <i class="fas fa-times text-{{currentUser.theme}}"></i>
+                      {{/if}}
+                    {{/each}}  
+                  </div>
+                {{#if outOfMonth date}}<div class="OOMoverlay"></div>{{/if}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>  
+</template>

@@ -1,0 +1,20 @@
+<template name="nav">
+	<nav class="nav navbar-dark bg-dark align-items-center px-3">
+    <div class="f-1"></div>
+    <a href="/home" class="navbar-brand f-1 d-flex justify-content-center">
+      <h2 class="pt-2">
+        JDT Raid Planner
+      </h2>
+    </a>
+    <div class="position-relative f-1 d-flex justify-content-end">
+      {{#if currentUser}}
+        <div>{{currentUser.username}}</div>
+      {{else}}
+        <div id="loginBtn" class="btn btn-dark d-flex flex-column border border-light">
+          <i class="fab fa-2x fa-discord"></i>
+          Login with discord
+        </div>
+      {{/if}}
+    </div>
+	</nav>
+</template>

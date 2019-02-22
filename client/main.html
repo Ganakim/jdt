@@ -1,0 +1,20 @@
+<head>
+  <title>Amnesia Companion</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+  
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body class="d-flex flex-column p-0">
+  {{>main}}
+</body>
+
+<template name="main">
+  <div class="main d-flex flex-column">
+    {{>nav}}
+    <div class="mainContent f-1">
+      {{>Template.dynamic template=content}}
+    </div>
+  </div>
+</template>
