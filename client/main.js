@@ -4,6 +4,7 @@ import { HTTP } from 'meteor/http'
 
 import './main.html'
 import './imports.js'
+import './lib/collections.js'
 
 Template.main.helpers({
   content(){
@@ -26,6 +27,15 @@ Template.main.events({
     $('.chatBoxToggle').addClass('far').removeClass('fas')
     $('#chatBox').addClass('hidden', 100)
   },
+  'click *':function(e){
+    if(!$.contains($('.navDrop')[0], e.target) && !$.contains($('.navDrop').next('.dropdown')[0], e.target)){
+      if(!$('.navDrop').next('.dropdown').hasClass('flat')){
+        $('.navDrop').next('.dropdown').addClass('flat')
+        $('.navDrop').find('.dropdownIndicator-left, .dropdownIndicator-right').addClass('flat')
+      }
+    }
+  }
 })
 
-Meteor.subscribe('users')
+Meteor.subscribe('Users')
+Meteor.subscribe('Dates')

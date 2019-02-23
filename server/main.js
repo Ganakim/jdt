@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor'
 import { HTTP } from 'meteor/http'
 
+import './lib/collections.js'
+
 Meteor.startup(() => {
   // code to run on server at startup
 })
@@ -37,11 +39,19 @@ Meteor.methods({
   }
 })
 
-Meteor.publish('users',()=>{
+Meteor.publish('Users',()=>{
   return Meteor.users.find({},{
     fields:{
       local:1,
       avatar:1
+    }
+  })
+})
+
+Meteor.publish('Dates',()=>{
+  return Dates.find({},{
+    fields:{
+      
     }
   })
 })

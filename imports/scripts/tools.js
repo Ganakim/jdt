@@ -73,36 +73,6 @@ Tools = {
     }
     return result;
   },
-  themes(){
-    return {
-      colors:[
-        'red',
-        'pink',
-        'purple',
-        'deep-purple',
-        'indigo',
-        'blue',
-        'light-blue',
-        'cyan',
-        'teal',
-        'green',
-        'lime',
-        'khaki',
-        'yellow',
-        'amber',
-        'orange',
-        'deep-orange',
-        'blue-grey',
-        'brown',
-        'grey',
-        'dark-grey',
-        'black'
-      ],
-      themes:[
-      
-      ]
-    }
-  },
 }
 for(var helper in Tools){
   Template.registerHelper(helper, Tools[helper])
