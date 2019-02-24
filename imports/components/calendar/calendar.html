@@ -23,25 +23,11 @@
                   {{formatTime date "D"}}
                 </div>
               </div>
-              <div class="f-1 position-relative pointer border day d-flex">
-                  <div id="Am" class="f-1">
-                    {{#each arrayify Am}}
-                      {{#if this}}
-                        <div class="p-3 rounded-circle bg-{{currentUser.theme}}"></div>
-                      {{else}}
-                        <i class="fas fa-times text-{{currentUser.theme}}"></i>
-                      {{/if}}
-                    {{/each}}
-                  </div>
-                  <div id="Pm" class="f-1">
-                    {{#each arrayify Pm}}
-                      {{#if this}}
-                        <div class="p-3 rounded-circle bg-{{currentUser.theme}}"></div>
-                      {{else}}
-                        <i class="fas fa-times text-{{currentUser.theme}}"></i>
-                      {{/if}}
-                    {{/each}}  
-                  </div>
+              <div class="f-1 position-relative pointer border day d-flex flex-column">
+                {{#each props}}
+                  <div id="propTime">{{formatTime date "h:mm a"}}</div>
+                {{/each}}
+                {{#if isSelectedDate date}}<div class="CDoverlay border border-warning"></div>{{/if}}
                 {{#if outOfMonth date}}<div class="OOMoverlay"></div>{{/if}}
               </div>
             </div>

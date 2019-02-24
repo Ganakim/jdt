@@ -4,7 +4,6 @@ import { HTTP } from 'meteor/http'
 
 import './main.html'
 import './imports.js'
-import './lib/collections.js'
 
 Template.main.helpers({
   content(){

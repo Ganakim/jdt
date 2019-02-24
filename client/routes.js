@@ -21,11 +21,11 @@ FlowRouter.route('/home', {
 FlowRouter.route('/auth', {
   action(params, queryParams) {
     console.log(params, queryParams)
-    Meteor.call('discordPOST', queryParams.code, (err, res)=>{
+    Meteor.call('discordPOST', queryParams.code, (err, res1)=>{
       if(err){
         console.log(err)
       }else{
-        Meteor.call('discordMe',res,(err, res)=>{
+        Meteor.call('discordMe',res1,(err, res)=>{
           user = res.data
           Meteor.call('findUser',user.id,(err, res)=>{
             if(err){

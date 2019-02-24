@@ -1,23 +1,26 @@
 import { Meteor } from 'meteor/meteor'
 import { HTTP } from 'meteor/http'
 
-import './lib/collections.js'
-
-Meteor.startup(() => {
-  // code to run on server at startup
+Meteor.startup(() => {//Allow for future months is VERY difficult
+  Dates.update({},{$set:{current:false}},{multi:true})
+  Array(35).fill(0).map((n, i) => {
+    currentDay = moment().startOf('month').startOf('week').clone().add(i, 'day').valueOf()
+    if(!Dates.findOne({date:currentDay})){
+      Dates.insert({date:currentDay, props:[], current:true});
+    }else{
+      if(moment(currentDay).isAfter(moment().subtract(1,'d'))){
+        Dates.update({date:currentDay},{$set:{current:true}})
+      }else{
+        Dates.update({date:currentDay},{$set:{current:true,props:[]}})
+      }
+    }
+  })
+  Dates.remove({current:false})
 })
 
 Meteor.methods({
-  loginD(){
-    return HTTP.get('https://discordapp.com/api/oauth2/authorize',{
-      params:{
-        client_id:'548252166217924623',
-        scope:'identify'
-      }
-    })
-  },
   discordPOST(code){
-    return HTTP.post(`https://discordapp.com/api/oauth2/token?client_id=548252166217924623&client_secret=Rhy%5FIl0lE8QPCQLI7BsCQHnxlrEasv3T&grant_type=client%5Fcredentials&scope=identify&code=${code}&redirect_uri=http%3A%2F%2F192.168.1.12%3A3000%2Fhome`)
+    return HTTP.post(`https://discordapp.com/api/oauth2/token?client_id=548252166217924623&client_secret=Rhy%5FIl0lE8QPCQLI7BsCQHnxlrEasv3T&grant_type=client%5Fcredentials&scope=identify%20guilds&code=${code}&redirect_uri=http%3A%2F%2Fjdt.herokuapp%3A3000%2Fhome`)
   },
   discordMe(res){
     return HTTP.get(`https://discordapp.com/api/users/@me`,{
@@ -36,12 +39,34 @@ Meteor.methods({
       local:user.locale,
       avatar:`cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
     }})
+  },
+  addRaid(date){
+    Dates.find().fetch().map((day)=>{
+      if(moment(day.date).isSame(date, 'day')){
+        Dates.update(day._id,{$push:{props:{date:date,players:[]}}})
+      }
+    })
+  },
+  joinRaid(date, leave){
+    update = {}
+    update[leave ? '$pull' : '$push'] = {}
+    var present = false
+    Dates.findOne({date:moment(moment(date).format('YYYY-MM-DD')).valueOf()}).props.map((prop, i)=>{
+      if(prop.date == date){
+        update[leave ? '$pull' : '$push'][`props.${i}.players`] = this.userId
+        present = prop.players.includes(this.userId)
+      }
+    })
+    if((!present && !leave) || (present && leave)){
+      Dates.update({date:moment(moment(date).format('YYYY-MM-DD')).valueOf()},update)
+    }
   }
 })
 
 Meteor.publish('Users',()=>{
   return Meteor.users.find({},{
     fields:{
+      type:1,
       local:1,
       avatar:1
     }

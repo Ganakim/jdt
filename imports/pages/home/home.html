@@ -1,10 +1,75 @@
 <template name="home">
 	<div class="d-flex">
 		{{#if currentUser}}
-			{{>calendar}}
+			<div class="d-flex w-100">
+				<div class="scroll-y">
+					{{>calendar}}
+				</div>
+				<div class="d-flex f-1 flex-column">
+					<h2 class="d-flex justify-content-center mt-4">
+						Welcome {{currentUser.username}}!
+					</h2>
+					<div class="border m-3"></div>
+					<div class="px-4 d-flex flex-column">
+						<h5 class="font-weight-bold">Proposed Raids:</h5>
+						{{#if currentProps}}
+							{{#each currentProps}}
+								<div class="d-flex flex-column m-1">
+									<div class="font-weight-bold">{{formatTime date "MMM DD, h:mm A"}}:</div>
+									{{#each players}}
+										<h6 class="ml-4">{{search "Users" false this "username"}}</h6>
+									{{/each}}
+									<div class="d-flex">
+										<div id="joinRaid" class="btn btn-primary ml-3 f-1">Join Raid!</div>
+										<div id="leaveRaid" class="btn btn-danger ml-3 px-4">Bail!</div>
+									</div>
+								</div>
+							{{/each}}
+						{{else}}
+							<div>There are no raids planned for this day, best go grind!</div><!-- Add randomized quips -->
+						{{/if}}
+					</div>
+					<div class="border m-3"></div>
+					{{#if is currentUser.type "admin"}}
+						<form id="prop" class="d-flex flex-column px-4">
+							<h5 class="font-weight-bold">Admin controls:</h5>
+							<h2 class="font-weight-bold text-center">{{formatTime selectedDate "MM/DD"}}</h2>
+							<div class="d-flex font-weight-bold justify-content-center align-items-center">
+								<div class="d-flex align-content-center">
+									<h3 class="m-0"><input type="text" class="form-control" value="{{formatTime selectedDate 'h'}}"></h3>
+									<div id="proph" class="d-flex flex-column">
+										<i class="fas border border-dark py-0 px-1 btn btn-light fa-angle-up"></i>
+										<i class="fas border border-dark py-0 px-1 btn btn-light fa-angle-down"></i>
+									</div>
+								</div>
+								<h3 class="mx-1">:</h3>
+								<div class="d-flex align-content-center">
+									<h3 class="m-0"><input type="text" class="form-control" value="{{formatTime selectedDate 'mm'}}"></h3>
+									<div id="propm" class="d-flex flex-column">
+										<i class="fas border border-dark py-0 px-1 btn btn-light fa-angle-up"></i>
+										<i class="fas border border-dark py-0 px-1 btn btn-light fa-angle-down"></i>
+									</div>
+								</div>
+								<div class="d-flex ml-1 align-content-center">
+									<h3 class="m-0"><input type="text" onkeydown="return false" class="form-control" value="{{formatTime selectedDate 'A'}}"></h3>
+									<div id="propa" class="d-flex flex-column">
+										<i class="fas border border-dark py-0 px-1 btn btn-light fa-angle-up"></i>
+										<i class="fas border border-dark py-0 px-1 btn btn-light fa-angle-down"></i>
+									</div>
+								</div>
+							</div>
+							{{#if okDate}}
+								<button type="submit" class="btn homeOption btn-primary mx-4 mt-3 py-3">Propose a raid</button>
+							{{else}}
+								<button type="submit" disabled class="btn homeOption btn-primary mx-4 mt-3 py-3">Propose a raid</button>
+							{{/if}}
+						</form>
+					{{/if}}
+				</div>
+			</div>
+			{{>Template.dynamic template=currentUser.type}}
 		{{else}}
 			You'll need to log in for access!
 		{{/if}}
 	</div>
 </template>
-
