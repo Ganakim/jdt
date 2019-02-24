@@ -20,7 +20,7 @@ Meteor.startup(() => {//Allow for future months is VERY difficult
 
 Meteor.methods({
   discordPOST(code){
-    return HTTP.post(`https://discordapp.com/api/oauth2/token?client_id=548252166217924623&client_secret=Rhy%5FIl0lE8QPCQLI7BsCQHnxlrEasv3T&grant_type=client%5Fcredentials&scope=identify%20guilds&code=${code}&redirect_uri=http%3A%2F%2Fjdt.herokuapp%3A3000%2Fhome`)
+    return HTTP.post(`https://discordapp.com/api/oauth2/token?client_id=548252166217924623&client_secret=${process.env.Client_Secret}&grant_type=client%5Fcredentials&scope=identify%20guilds&code=${code}&redirect_uri=http%3A%2F%2Fjdt.herokuapp%3A3000%2Fhome`)
   },
   discordMe(res){
     return HTTP.get(`https://discordapp.com/api/users/@me`,{
